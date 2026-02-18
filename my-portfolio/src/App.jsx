@@ -6,6 +6,7 @@ const SKILLS = ["React", "Node.js", "Tailwind CSS", "JavaScript", "TypeScript", 
 const PROJECTS = [
   {
     title: "The Rustic Bean",
+    status: "Completed",
     image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=500",
     description: "High-performance landing page for a specialty coffee shop.",
     longDescription: "Rebuilt a legacy WordPress site into a lightning-fast React application. Achieved a 100/100 Lighthouse score and improved mobile conversion by 40% using optimized images and modern CSS.",
@@ -13,6 +14,7 @@ const PROJECTS = [
   },
   {
     title: "Iron Vault Gym",
+    status: "Completed",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=500",
     description: "Membership portal with real-time class availability updates.",
     longDescription: "Integrated a custom API for real-time scheduling. Built with a high-availability backend to support 500+ active members.",
@@ -20,11 +22,19 @@ const PROJECTS = [
   },
   {
     title: "Daugavpils Dine",
+    status: "Completed",
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=500",
     description: "Mobile-first digital menu and reservation system for a bistro.",
-    longDescription: "Replaced PDF menus with a dynamic web view. Included multi-language support (LV/RU/EN) to cater to the local demographic.",
+    longDescription: "Replacing PDF menus with a dynamic web view. Including multi-language support (LV/RU/EN) and integrated booking widget.",
     tags: ["Local SEO", "UX", "React"]
   }
+];
+
+const PROCESS = [
+  { step: "01", title: "Discovery", desc: "We discuss your goals and audience to create a tailored digital strategy." },
+  { step: "02", title: "Design", desc: "I create a high-fidelity mockup. No code is written until you love the vision." },
+  { step: "03", title: "Development", desc: "Building your solution focusing on speed, SEO, and responsiveness." },
+  { step: "04", title: "Launch", desc: "Deployment and 30 days of support to ensure everything runs perfectly." }
 ];
 
 const TESTIMONIALS = [
@@ -85,11 +95,24 @@ function SkillsMarquee() {
 }
 
 function ProjectCard({ project, onClick }) {
+  // Helper to color the status badges
+  const getStatusColor = (status) => {
+    switch(status) {
+      case 'Live': return 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20';
+      case 'In Progress': return 'bg-blue-500/10 text-blue-500 border-blue-500/20';
+      default: return 'bg-slate-500/10 text-slate-400 border-slate-500/20';
+    }
+  };
+
   return (
     <div onClick={() => onClick(project)} className="relative group cursor-pointer text-left">
       <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-500"></div>
       <div className="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-transparent transition-all duration-500">
-        <div className="h-48 overflow-hidden">
+        <div className="h-48 overflow-hidden relative">
+          {/* Status Badge */}
+          <span className={`absolute top-4 right-4 z-10 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border backdrop-blur-md ${getStatusColor(project.status)}`}>
+            {project.status}
+          </span>
           <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100" />
         </div>
         <div className="p-6">
@@ -149,7 +172,6 @@ export default function App() {
         </svg>
       </button>
 
-      {/* Navigation */}
       <nav className="p-6 flex justify-between items-center border-b border-slate-800 sticky top-0 bg-slate-900/80 backdrop-blur-md z-40">
         <Logo />
         <div className="space-x-6 text-slate-400 font-medium hidden md:block">
@@ -199,16 +221,31 @@ export default function App() {
           </div>
         </section>
 
-        {/* Pricing with Subtle Outline Glow */}
+        {/* How I Work */}
+        <section className="max-w-6xl mx-auto py-20 px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold mb-4">How I Work</h2>
+            <p className="text-slate-400">A structured approach to taking your project from idea to reality.</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-6">
+            {PROCESS.map((item, i) => (
+              <div key={i} className="relative group p-8 rounded-3xl bg-slate-800/20 border border-slate-800 hover:border-blue-500/50 transition-all text-left">
+                <span className="text-4xl font-black text-slate-800 group-hover:text-blue-500/20 transition-colors absolute top-4 right-6 select-none">{item.step}</span>
+                <h3 className="text-xl font-bold mb-4 relative z-10">{item.title}</h3>
+                <p className="text-slate-400 text-sm leading-relaxed relative z-10">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Pricing */}
         <section id="pricing" className="max-w-6xl mx-auto py-20 px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Transparent Pricing</h2>
             <p className="text-slate-400">Simple plans for local businesses and startups.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 text-left items-start">
-            
-            {/* Starter */}
-            <div className="relative group cursor-default">
+            <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-3xl blur opacity-10 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative bg-slate-900 border border-slate-800 p-8 rounded-3xl transition duration-300 hover:border-transparent">
                 <h3 className="text-xl font-bold mb-2">The Landing Page</h3>
@@ -222,11 +259,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Business (Most Popular) */}
-            <div className="relative group transform md:-translate-y-4 scale-[1.02] cursor-default">
+            <div className="relative group transform md:-translate-y-4 scale-[1.02]">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-3xl blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative bg-slate-800 border-2 border-blue-500/50 p-8 rounded-3xl shadow-2xl">
-                <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase">Most Popular</div>
+                <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest">Most Popular</div>
                 <h3 className="text-xl font-bold mb-2 text-white">Business Growth</h3>
                 <div className="text-4xl font-bold mb-6 text-white">€999</div>
                 <ul className="space-y-4 mb-8 text-sm text-slate-200 font-medium">
@@ -238,8 +274,7 @@ export default function App() {
               </div>
             </div>
 
-            {/* Custom */}
-            <div className="relative group cursor-default">
+            <div className="relative group">
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-3xl blur opacity-10 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative bg-slate-900 border border-slate-800 p-8 rounded-3xl transition duration-300 hover:border-transparent">
                 <h3 className="text-xl font-bold mb-2">Custom App</h3>
@@ -252,7 +287,6 @@ export default function App() {
                 <button onClick={() => {setIsFormOpen(true); document.getElementById('contact').scrollIntoView({behavior:'smooth'})}} className="w-full py-3 rounded-xl border border-slate-600 hover:bg-slate-800 font-bold transition">Contact Me</button>
               </div>
             </div>
-
           </div>
         </section>
 
@@ -279,7 +313,7 @@ export default function App() {
           </div>
         </section>
 
-        {/* Contact */}
+        {/* Contact Form */}
         <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-8 md:p-12 rounded-3xl shadow-2xl transition-all duration-500">
             {submitted ? (
@@ -337,7 +371,12 @@ export default function App() {
             <button onClick={() => setSelectedProject(null)} className="absolute top-4 right-4 bg-slate-800 text-white p-2 rounded-full z-10 transition">✕</button>
             <img src={selectedProject.image} className="w-full h-64 object-cover" alt={selectedProject.title} />
             <div className="p-8 text-left">
-              <h2 className="text-3xl font-bold mb-4 text-white">{selectedProject.title}</h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-3xl font-bold text-white">{selectedProject.title}</h2>
+                <span className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border bg-slate-800/50 text-slate-400 border-slate-700`}>
+                   {selectedProject.status}
+                </span>
+              </div>
               <p className="text-slate-400 mb-6 leading-relaxed font-medium">{selectedProject.longDescription}</p>
               <div className="flex gap-4">
                 <button className="flex-grow bg-blue-600 py-3 rounded-xl font-bold hover:bg-blue-500 transition">Live Demo</button>
@@ -351,10 +390,10 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-slate-950 border-t border-slate-800 pt-16 pb-8">
         <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          <div className="col-span-1 md:col-span-2 space-y-6">
+          <div className="col-span-1 md:col-span-2 space-y-6 text-left">
             <Logo />
             <p className="text-slate-400 max-w-sm text-sm leading-relaxed">
-              Building high-performance digital products for local businesses and global startups. Focused on React, speed, and conversion-driven design.
+              Building high-performance digital products for local businesses and global startups.
             </p>
             <div className="flex items-center gap-2">
               <span className="relative flex h-3 w-3">
@@ -368,8 +407,8 @@ export default function App() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em]">Navigation</h4>
-            <ul className="space-y-4 text-sm text-slate-400 text-left">
+            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em] text-left">Navigation</h4>
+            <ul className="space-y-4 text-sm text-slate-400 text-left font-medium">
               <li><a href="#projects" className="hover:text-blue-400 transition">Portfolio</a></li>
               <li><a href="#services" className="hover:text-blue-400 transition">Services</a></li>
               <li><a href="#pricing" className="hover:text-blue-400 transition">Pricing</a></li>
@@ -378,11 +417,11 @@ export default function App() {
           </div>
 
           <div>
-            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em]">Connect</h4>
-            <ul className="space-y-4 text-sm text-slate-400 text-left">
+            <h4 className="text-white font-bold mb-6 uppercase text-xs tracking-[0.2em] text-left">Connect</h4>
+            <ul className="space-y-4 text-sm text-slate-400 text-left font-medium">
               <li><a href="#" className="hover:text-blue-400 transition">LinkedIn</a></li>
               <li><a href="#" className="hover:text-blue-400 transition">GitHub</a></li>
-              <li className="text-slate-500 pt-2 border-t border-slate-800 text-left">
+              <li className="text-slate-500 pt-2 border-t border-slate-800">
                 <span className="block text-white font-semibold mb-1">Based in:</span>
                 Riga, Latvia
               </li>
