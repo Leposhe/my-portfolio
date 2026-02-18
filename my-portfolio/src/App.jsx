@@ -97,7 +97,22 @@ function App() {
 
       {/* Simple Footer */}
       <footer className="py-10 text-center text-slate-500 border-t border-slate-800">
-        <p>© 2026 Kristians. Built in Daugavpils.</p>
+        <p>© 2026 Kristians. Built in Riga, Latvia.</p>
+        {/* Contact Section */}
+      <section className="max-w-4xl mx-auto py-24 px-6 text-center">
+        <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-12 rounded-3xl">
+          <h2 className="text-4xl font-bold mb-4">Ready to upgrade your business?</h2>
+          <p className="text-slate-400 mb-8 text-lg">
+            I'm currently accepting new projects in Daugavpils and remotely.
+          </p>
+          <a 
+            href="mailto:leposhe@gmail.com?subject=Project Inquiry - [Your Name]"
+            className="inline-block bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold px-10 py-4 rounded-full transition transform hover:scale-105 shadow-xl shadow-emerald-500/20"
+          >
+            Start a Conversation
+          </a>
+        </div>
+      </section>
       </footer>
     </div>
   )
