@@ -1,33 +1,28 @@
 import { useState, useEffect } from 'react'
 
 // --- Data ---
-
-const SKILLS = [
-  "React", "Node.js", "Tailwind CSS", "JavaScript", 
-  "TypeScript", "GitHub", "Netlify", "Cursor", 
-  "PostgreSQL", "Firebase", "Vite", "SEO"
-];
+const SKILLS = ["React", "Node.js", "Tailwind CSS", "JavaScript", "TypeScript", "GitHub", "Netlify", "Cursor", "PostgreSQL", "Firebase", "Vite", "SEO"];
 
 const PROJECTS = [
   {
     title: "The Rustic Bean",
     image: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&q=80&w=500",
     description: "High-performance landing page for a specialty coffee shop.",
-    longDescription: "Rebuilt a legacy WordPress site into a lightning-fast React application. Achieved a 100/100 Lighthouse score and improved mobile conversion by 40% using optimized images and modern CSS.",
+    longDescription: "Rebuilt a legacy WordPress site into a lightning-fast React application. Achieved a 100/100 Lighthouse score and improved mobile conversion by 40%.",
     tags: ["React", "Tailwind", "UX Design"]
   },
   {
     title: "Iron Vault Gym",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=500",
     description: "Membership portal with real-time class availability updates.",
-    longDescription: "Integrated a custom API for real-time scheduling. Built with a high-availability backend to support 500+ active members with push notifications for class cancellations.",
+    longDescription: "Integrated a custom API for real-time scheduling. Built with high-availability Node.js backend to support 500+ active members.",
     tags: ["React", "API Integration", "Node.js"]
   },
   {
     title: "Daugavpils Dine",
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=500",
     description: "Mobile-first digital menu and reservation system for a bistro.",
-    longDescription: "Replaced PDF menus with a dynamic web view. Included multi-language support (LV/RU/EN) to cater to the local demographic and integrated a table booking widget.",
+    longDescription: "Replaced PDF menus with a dynamic web view. Included multi-language support (LV/RU/EN) to cater to the local demographic.",
     tags: ["Local SEO", "UX", "React"]
   }
 ];
@@ -40,9 +35,7 @@ function SkillsMarquee() {
       <div className="flex w-max animate-marquee hover:pause">
         {[...SKILLS, ...SKILLS].map((skill, i) => (
           <div key={i} className="mx-8 flex items-center gap-2">
-            <span className="text-2xl font-bold text-slate-700 hover:text-blue-500 transition-colors uppercase tracking-widest">
-              {skill}
-            </span>
+            <span className="text-2xl font-bold text-slate-700 hover:text-blue-500 transition-colors uppercase tracking-widest">{skill}</span>
             <span className="text-blue-500/30 text-2xl">•</span>
           </div>
         ))}
@@ -57,26 +50,20 @@ function ProjectCard({ project, onClick }) {
       <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-500"></div>
       <div className="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-transparent transition-all duration-500">
         <div className="h-48 overflow-hidden">
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100"
-          />
+          <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100" />
         </div>
         <div className="p-6 text-left">
           <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition">{project.title}</h3>
           <p className="text-slate-400 mb-4 text-sm line-clamp-2">{project.description}</p>
           <div className="flex flex-wrap gap-2">
             {project.tags.map(tag => (
-              <span key={tag} className="text-[10px] uppercase tracking-wider font-bold bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700">
-                {tag}
-              </span>
+              <span key={tag} className="text-[10px] uppercase tracking-wider font-bold bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700">{tag}</span>
             ))}
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function Modal({ project, onClose }) {
@@ -97,33 +84,35 @@ function Modal({ project, onClose }) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // --- Main App ---
 
 export default function App() {
-  const [likes, setLikes] = useState(0)
-  const [selectedProject, setSelectedProject] = useState(null)
-  const [submitted, setSubmitted] = useState(false)
+  const [likes, setLikes] = useState(0);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
-  useEffect(() => { window.scrollTo(0, 0) }, [])
+  useEffect(() => { window.scrollTo(0, 0) }, []);
 
+  // Correct HandleSubmit for Netlify + React
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
+
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(formData).toString(),
     })
       .then(() => setSubmitted(true))
-      .catch((error) => alert(error))
-  }
+      .catch((error) => alert("Submission error: " + error));
+  };
 
   return (
     <div className="min-h-screen bg-slate-900 text-white font-sans selection:bg-blue-500 selection:text-white">
-      {/* Navigation */}
       <nav className="p-6 flex justify-between items-center border-b border-slate-800 sticky top-0 bg-slate-900/80 backdrop-blur-md z-10">
         <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-emerald-400 bg-clip-text text-transparent">KRISTIANS.DEV</h1>
         <div className="space-x-6 text-slate-400">
@@ -134,7 +123,6 @@ export default function App() {
       </nav>
 
       <main>
-        {/* Hero Section */}
         <header className="max-w-4xl mx-auto pt-24 pb-16 px-6 text-center">
           <h2 className="text-6xl font-extrabold mb-6 tracking-tight">Building Digital <span className="text-blue-500">Solutions</span> from Latvia.</h2>
           <p className="text-xl text-slate-400 mb-10 max-w-2xl mx-auto">Full Stack Developer specializing in high-performance React applications for local businesses.</p>
@@ -144,10 +132,8 @@ export default function App() {
           </div>
         </header>
 
-        {/* Skills Marquee */}
         <SkillsMarquee />
 
-        {/* Projects Section */}
         <section id="projects" className="max-w-6xl mx-auto py-20 px-6">
           <h2 className="text-3xl font-bold mb-12 flex items-center gap-4">Featured Work <div className="h-px bg-slate-800 flex-grow"></div></h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -157,14 +143,13 @@ export default function App() {
 
         <Modal project={selectedProject} onClose={() => setSelectedProject(null)} />
 
-        {/* Services Section */}
         <section className="max-w-6xl mx-auto py-20 px-6 border-t border-slate-800/50">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
             {[
-              { icon: "🚀", title: "High Performance", desc: "Sites that load in under 1 second. Speed is the #1 ranking factor." },
-              { icon: "📱", title: "Mobile First", desc: "Pixel-perfect on every screen. Optimized for the modern mobile user." },
-              { icon: "📈", title: "SEO Optimized", desc: "Structured data and clean code to help you climb Google rankings." },
-              { icon: "🌍", title: "Multi-language", desc: "Full LV/RU/EN support to capture the entire Baltic market." }
+              { icon: "🚀", title: "High Performance", desc: "Sites that load in under 1 second. Speed is key." },
+              { icon: "📱", title: "Mobile First", desc: "Pixel-perfect on every screen size." },
+              { icon: "📈", title: "SEO Optimized", desc: "Code that search engines love." },
+              { icon: "🌍", title: "Multi-language", desc: "Full LV/RU/EN support for local markets." }
             ].map((s, i) => (
               <div key={i} className="p-8 rounded-3xl bg-slate-800/20 border border-slate-800 hover:border-slate-700 transition-all group">
                 <div className="text-4xl mb-6 transition-transform group-hover:scale-125 duration-300 inline-block">{s.icon}</div>
@@ -175,15 +160,15 @@ export default function App() {
           </div>
         </section>
 
-        {/* Pricing Section */}
         <section id="pricing" className="max-w-6xl mx-auto py-20 px-6">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Transparent Pricing</h2>
             <p className="text-slate-400">Simple plans for local businesses and startups.</p>
           </div>
           <div className="grid md:grid-cols-3 gap-8 items-start text-left">
-            <div className="group bg-slate-800/40 border border-slate-700 p-8 rounded-3xl flex flex-col transition-all duration-300 hover:bg-slate-800/60 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-500/5">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition">The Landing Page</h3>
+            {/* Pricing cards... (Keep the current styling for Starter, Business, Custom) */}
+            <div className="group bg-slate-800/40 border border-slate-700 p-8 rounded-3xl flex flex-col transition-all duration-300 hover:bg-slate-800/60 hover:-translate-y-2">
+              <h3 className="text-xl font-bold mb-2">The Landing Page</h3>
               <div className="text-4xl font-bold mb-6">€499</div>
               <ul className="space-y-4 mb-8 flex-grow text-sm text-slate-300">
                 <li>✅ Single Page React Site</li>
@@ -192,7 +177,7 @@ export default function App() {
               </ul>
               <button className="w-full py-3 rounded-xl border border-slate-600 group-hover:bg-blue-500/10 font-bold transition-all">Get Started</button>
             </div>
-            <div className="relative bg-slate-800 border-2 border-blue-500 p-8 rounded-3xl flex flex-col transform md:-translate-y-4 shadow-2xl transition-all duration-500 hover:scale-[1.02] hover:shadow-blue-500/40">
+            <div className="relative bg-slate-800 border-2 border-blue-500 p-8 rounded-3xl flex flex-col transform md:-translate-y-4 shadow-2xl transition-all duration-500 hover:scale-[1.02]">
               <div className="absolute top-0 right-8 -translate-y-1/2 bg-gradient-to-r from-blue-600 to-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase animate-pulse">Most Popular</div>
               <h3 className="text-xl font-bold mb-2">Business Growth</h3>
               <div className="text-4xl font-bold mb-6">€999</div>
@@ -203,8 +188,8 @@ export default function App() {
               </ul>
               <button className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 font-bold transition-all">Start Building</button>
             </div>
-            <div className="group bg-slate-800/40 border border-slate-700 p-8 rounded-3xl flex flex-col transition-all duration-300 hover:-translate-y-2 hover:shadow-purple-500/5">
-              <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition">Custom App</h3>
+            <div className="group bg-slate-800/40 border border-slate-700 p-8 rounded-3xl flex flex-col transition-all duration-300 hover:-translate-y-2">
+              <h3 className="text-xl font-bold mb-2">Custom App</h3>
               <div className="text-4xl font-bold mb-6 italic text-slate-500">Custom</div>
               <ul className="space-y-4 mb-8 flex-grow text-sm text-slate-300">
                 <li>✅ User Login/Portals</li>
@@ -216,14 +201,17 @@ export default function App() {
           </div>
         </section>
 
-        {/* Contact Section */}
         <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
           <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-8 md:p-12 rounded-3xl shadow-2xl">
             {!submitted ? (
               <>
                 <h2 className="text-4xl font-bold mb-4">Ready to upgrade?</h2>
                 <p className="text-slate-400 mb-10 text-lg">Currently accepting new projects in Riga and Daugavpils.</p>
-                <form onSubmit={handleSubmit} data-netlify="true" name="portfolio-contact" className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                <form 
+                  onSubmit={handleSubmit} 
+                  name="portfolio-contact" 
+                  className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left"
+                >
                   <input type="hidden" name="form-name" value="portfolio-contact" />
                   <div className="flex flex-col gap-2">
                     <label className="text-sm font-semibold text-slate-300 ml-1">Name</label>
@@ -243,7 +231,7 @@ export default function App() {
                 </form>
               </>
             ) : (
-              <div className="py-12">
+              <div className="py-12 animate-in fade-in zoom-in duration-500">
                 <div className="text-6xl mb-6">🎉</div>
                 <h2 className="text-3xl font-bold mb-2">Message Received!</h2>
                 <p className="text-slate-400">Paldies! I'll get back to you within 24 hours.</p>
@@ -258,5 +246,5 @@ export default function App() {
         <p>© 2026 Kristians. Built in Riga, Latvia.</p>
       </footer>
     </div>
-  )
+  );
 }
