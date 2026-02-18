@@ -3,23 +3,28 @@ import { useState } from 'react'
 // Updated Component with Image Support
 function ProjectCard({ title, description, tags, image }) {
   return (
-    <div className="bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-blue-500 transition group">
-      <div className="h-48 overflow-hidden bg-slate-700">
-        <img 
-          src={image} 
-          alt={title} 
-          className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-80 group-hover:opacity-100"
-        />
-      </div>
-      <div className="p-6 text-left">
-        <h3 className="text-xl font-bold mb-2">{title}</h3>
-        <p className="text-slate-400 mb-4 text-sm">{description}</p>
-        <div className="flex flex-wrap gap-2">
-          {tags.map(tag => (
-            <span key={tag} className="text-xs bg-blue-500/10 text-blue-400 px-2 py-1 rounded border border-blue-500/20">
-              {tag}
-            </span>
-          ))}
+    <div className="relative group">
+      {/* The "Glow" behind the card on hover */}
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-2xl blur opacity-25 group-hover:opacity-100 transition duration-500"></div>
+      
+      <div className="relative bg-slate-900 rounded-2xl overflow-hidden border border-slate-800 hover:border-transparent transition-all duration-500">
+        <div className="h-48 overflow-hidden">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-60 group-hover:opacity-100"
+          />
+        </div>
+        <div className="p-6 text-left">
+          <h3 className="text-xl font-bold mb-2 group-hover:text-blue-400 transition">{title}</h3>
+          <p className="text-slate-400 mb-4 text-sm leading-relaxed">{description}</p>
+          <div className="flex flex-wrap gap-2">
+            {tags.map(tag => (
+              <span key={tag} className="text-[10px] uppercase tracking-wider font-bold bg-slate-800 text-slate-300 px-2 py-1 rounded border border-slate-700 group-hover:border-blue-500/50 transition">
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -94,6 +99,31 @@ function App() {
           </div>
         </section>
       </main>
+      <section className="max-w-6xl mx-auto py-20 px-6">
+  <div className="grid md:grid-cols-3 gap-12 text-left">
+    <div>
+      <div className="text-blue-500 text-3xl mb-4">🚀</div>
+      <h3 className="text-xl font-bold mb-2">High Performance</h3>
+      <p className="text-slate-400 text-sm">Sites that load in under 1 second. Fast sites rank better on Google and keep customers happy.</p>
+    </div>
+    <div>
+      <div className="text-emerald-500 text-3xl mb-4">📱</div>
+      <h3 className="text-xl font-bold mb-2">Mobile First</h3>
+      <p className="text-slate-400 text-sm">Most customers in Latvia browse on their phones. I build for small screens first, then desktops.</p>
+    </div>
+    <div>
+      <div className="text-purple-500 text-3xl mb-4">📈</div>
+      <h3 className="text-xl font-bold mb-2">SEO Optimized</h3>
+      <p className="text-slate-400 text-sm">Clean code that search engines love, helping local businesses get found by local customers.</p>
+    </div>
+    <div>
+  <div className="text-orange-500 text-3xl mb-4">🌍</div>
+  <h3 className="text-xl font-bold mb-2">Multi-language</h3>
+  <p className="text-slate-400 text-sm">Full support for LV/RU/EN integrations, ensuring your business reaches everyone in the Baltic market.</p>
+</div>
+  </div>
+</section>
+
       <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
         <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-12 rounded-3xl">
           <h2 className="text-4xl font-bold mb-4">Ready to upgrade your business?</h2>
@@ -108,6 +138,7 @@ function App() {
           </a>
         </div>
       </section>
+      
       {/* Simple Footer */}
       <footer className="py-10 text-center text-slate-500 border-t border-slate-800">
         <p>© 2026 Kristians. Built in Riga, Latvia.</p>
