@@ -100,15 +100,21 @@ export default function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const formData = new FormData(form);
-
+    
+    // Create an object that Netlify's server can read easily
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData).toString(),
+      body: new URLSearchParams(new FormData(form)).toString(),
     })
-      .then(() => setSubmitted(true))
-      .catch((error) => alert("Submission error: " + error));
+      .then((res) => {
+        if (res.ok) {
+          setSubmitted(true);
+        } else {
+          throw new Error("Form submission failed");
+        }
+      })
+      .catch((error) => alert(error));
   };
 
   return (
