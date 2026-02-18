@@ -44,6 +44,7 @@ function App() {
         <div className="space-x-6 text-slate-400">
           <a href="#projects" className="hover:text-white transition">Projects</a>
           <a href="#contact" className="hover:text-white transition">Contact</a>
+          <a href="#pricing" className="hover:text-white transition">Pricing</a>
         </div>
       </nav>
 
