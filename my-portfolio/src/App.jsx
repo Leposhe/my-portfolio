@@ -123,7 +123,59 @@ function App() {
 </div>
   </div>
 </section>
+{/* Pricing Section */}
+<section id="pricing" className="max-w-6xl mx-auto py-20 px-6">
+  <div className="text-center mb-16">
+    <h2 className="text-3xl font-bold mb-4">Transparent Pricing</h2>
+    <p className="text-slate-400">Simple plans for local businesses and startups.</p>
+  </div>
 
+  <div className="grid md:grid-cols-3 gap-8">
+    {/* Plan 1: The "Starter" */}
+    <div className="bg-slate-800/50 border border-slate-700 p-8 rounded-3xl flex flex-col">
+      <h3 className="text-xl font-bold mb-2">The Landing Page</h3>
+      <p className="text-slate-400 text-sm mb-6">Perfect for new businesses needing a professional presence.</p>
+      <div className="text-4xl font-bold mb-6">€499<span className="text-lg text-slate-500 font-normal">/project</span></div>
+      <ul className="space-y-4 mb-8 flex-grow">
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ Single Page React Site</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ Mobile Responsive</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ Contact Form Integration</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ Basic SEO Setup</li>
+      </ul>
+      <button className="w-full py-3 rounded-xl border border-slate-600 hover:bg-slate-700 transition font-bold">Get Started</button>
+    </div>
+
+    {/* Plan 2: The "Business" (Highlighted) */}
+    <div className="relative bg-slate-800 border-2 border-blue-500 p-8 rounded-3xl flex flex-col transform md:-translate-y-4 shadow-2xl shadow-blue-500/10">
+      <div className="absolute top-0 right-8 -translate-y-1/2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</div>
+      <h3 className="text-xl font-bold mb-2">Business Growth</h3>
+      <p className="text-slate-400 text-sm mb-6">For established businesses looking to dominate local search.</p>
+      <div className="text-4xl font-bold mb-6">€999<span className="text-lg text-slate-500 font-normal">/project</span></div>
+      <ul className="space-y-4 mb-8 flex-grow">
+        <li className="flex items-center gap-2 text-sm text-slate-200 font-medium">✅ Up to 5 Pages</li>
+        <li className="flex items-center gap-2 text-sm text-slate-200 font-medium">✅ Custom Animations</li>
+        <li className="flex items-center gap-2 text-sm text-slate-200 font-medium">✅ Advanced Local SEO</li>
+        <li className="flex items-center gap-2 text-sm text-slate-200 font-medium">✅ Google Maps Integration</li>
+        <li className="flex items-center gap-2 text-sm text-slate-200 font-medium">✅ Multi-language (LV/RU/EN)</li>
+      </ul>
+      <button className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 transition font-bold shadow-lg shadow-blue-600/20">Start Building</button>
+    </div>
+
+    {/* Plan 3: The "Custom" */}
+    <div className="bg-slate-800/50 border border-slate-700 p-8 rounded-3xl flex flex-col">
+      <h3 className="text-xl font-bold mb-2">Custom App</h3>
+      <p className="text-slate-400 text-sm mb-6">Complex solutions with databases and user authentication.</p>
+      <div className="text-4xl font-bold mb-6 italic text-slate-400 text-2xl">Custom</div>
+      <ul className="space-y-4 mb-8 flex-grow">
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ User Login/Portals</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ Database Integration</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ E-commerce Functionality</li>
+        <li className="flex items-center gap-2 text-sm text-slate-300">✅ 3 Months Support</li>
+      </ul>
+      <button className="w-full py-3 rounded-xl border border-slate-600 hover:bg-slate-700 transition font-bold">Contact for Quote</button>
+    </div>
+  </div>
+</section>
       <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
         <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-12 rounded-3xl">
           <h2 className="text-4xl font-bold mb-4">Ready to upgrade your business?</h2>
