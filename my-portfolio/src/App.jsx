@@ -38,7 +38,7 @@ function App() {
         </h1>
         <div className="space-x-6 text-slate-400">
           <a href="#projects" className="hover:text-white transition">Projects</a>
-          <a href="#" className="hover:text-white transition">Contact</a>
+          <a href="#contact" className="hover:text-white transition">Contact</a>
         </div>
       </nav>
 
@@ -94,11 +94,11 @@ function App() {
           </div>
         </section>
       </main>
-      <section className="max-w-4xl mx-auto py-24 px-6 text-center">
+      <section id="contact" className="max-w-4xl mx-auto py-24 px-6 text-center">
         <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-12 rounded-3xl">
           <h2 className="text-4xl font-bold mb-4">Ready to upgrade your business?</h2>
           <p className="text-slate-400 mb-8 text-lg">
-            I'm currently accepting new projects in Daugavpils and remotely.
+            I'm currently accepting new projects in Riga and remotely.
           </p>
           <a 
             href="mailto:leposhe@gmail.com?subject=Project Inquiry - [Your Name]"
