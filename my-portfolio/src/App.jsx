@@ -94,11 +94,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      {/* Simple Footer */}
-      <footer className="py-10 text-center text-slate-500 border-t border-slate-800">
-        <p>© 2026 Kristians. Built in Riga, Latvia.</p>
-        {/* Contact Section */}
       <section className="max-w-4xl mx-auto py-24 px-6 text-center">
         <div className="bg-gradient-to-b from-slate-800 to-slate-900 border border-slate-700 p-12 rounded-3xl">
           <h2 className="text-4xl font-bold mb-4">Ready to upgrade your business?</h2>
@@ -113,6 +108,10 @@ function App() {
           </a>
         </div>
       </section>
+      {/* Simple Footer */}
+      <footer className="py-10 text-center text-slate-500 border-t border-slate-800">
+        <p>© 2026 Kristians. Built in Riga, Latvia.</p>
+        
       </footer>
     </div>
   )
