@@ -155,17 +155,13 @@ function Logo() {
   );
 }
 
-// ... (rest of the code remains the same)
-
 function SkillsMarquee() {
   return (
-    /* Changed bg-slate-900 to bg-slate-950/30 and added backdrop-blur-sm */
-    <div className="bg-slate-950/30 backdrop-blur-sm border-y border-white/5 py-10 overflow-hidden select-none">
+    <div className="bg-slate-900 border-y border-slate-800 py-10 overflow-hidden select-none">
       <div className="flex w-max animate-marquee hover:pause">
         {[...SKILLS, ...SKILLS].map((skill, i) => (
           <div key={i} className="mx-8 flex items-center gap-2">
-            {/* Darkened the default color slightly to let the background pop */}
-            <span className="text-2xl font-bold text-slate-400 hover:text-blue-500 transition-colors uppercase tracking-widest">{skill}</span>
+            <span className="text-2xl font-bold text-slate-700 hover:text-blue-500 transition-colors uppercase tracking-widest">{skill}</span>
             <span className="text-blue-500/30 text-2xl">•</span>
           </div>
         ))}
@@ -173,8 +169,6 @@ function SkillsMarquee() {
     </div>
   );
 }
-
-// ... (rest of the code remains the same)
 
 function ProjectCard({ project, onClick }) {
   const getStatusColor = (status) => {
